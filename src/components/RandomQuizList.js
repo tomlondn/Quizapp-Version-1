@@ -59,6 +59,8 @@ const RandomQuizList = ({ allQuestions, setState, changeScore }) => {
                             changeQuestion={nextQuestion}
                         ></Question>
                     )
+                }else {
+                    return ('');
                 }
             })}
         </section>

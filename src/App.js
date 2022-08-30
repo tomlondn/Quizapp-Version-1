@@ -1,8 +1,6 @@
 import './App.css';
 import RandomQuizGenerator from './components/RandomQuizGenerator';
 import Questionairies from './components/Questionairies';
-import Question from './components/Question';
-
 
 function App() {
   const getToQuiz = element => {

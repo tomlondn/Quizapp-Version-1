@@ -32,7 +32,7 @@ const RandomQuizGenerator = () => {
   const getCategorieArrayObjext = (cats) => {
     let newCatOby = [];
 
-    cats.map(item => {
+    cats.forEach(item => {
       newCatOby.push({ active: null, categorie: item })
     })
     return newCatOby;
@@ -119,11 +119,7 @@ const RandomQuizGenerator = () => {
     setQuizState(state);
   }
 
-  const getCartgories = async () => {
-    const res = await axios.get(catApiurl);
-    setCategories(getCategorieArrayObjext(Object.keys(res.data)));
-    setLoading(false);
-  };
+
 
   const getQuestions = async (url) => {
     const res = await axios.get(url);
@@ -132,6 +128,12 @@ const RandomQuizGenerator = () => {
   };
 
   useEffect(() => {
+    const getCartgories = async () => {
+      const res = await axios.get(catApiurl);
+      setCategories(getCategorieArrayObjext(Object.keys(res.data)));
+      setLoading(false);
+    };
+
     getCartgories();
   }, []);
 

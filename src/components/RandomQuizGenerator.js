@@ -37,7 +37,13 @@ const RandomQuizGenerator = () => {
     })
     return newCatOby;
   }
-
+  const formatCat = (cat) => {
+   cat = cat.replaceAll(" ", "_");
+   cat = cat.replace("&", "and");
+   console.log(cat);
+   
+    return cat;
+  }
   const getCategory = (index) => {
     let quizCategorys = [...categories];
     let newQuizConfig = { ...quizConfig };
@@ -97,11 +103,9 @@ const RandomQuizGenerator = () => {
     if (quizConfig.categorie != null & !!quizConfig.count & quizConfig.difficulty != null) {
 
       var newApiUrl = "https://the-trivia-api.com/api/questions?categories=" +
-        quizConfig.categorie.toLowerCase() + "&limit=" + quizConfig.count + "&difficulty=" + quizConfig.difficulty.toLowerCase();
+      formatCat(quizConfig.categorie).toLowerCase() + "&limit=" + quizConfig.count + "&difficulty=" + quizConfig.difficulty.toLowerCase();
 
       setQuizState("startet");
-
-      console.log(newApiUrl)
 
       getQuestions(newApiUrl)
     }
@@ -118,8 +122,6 @@ const RandomQuizGenerator = () => {
   const changeQuizState = (state) => {
     setQuizState(state);
   }
-
-
 
   const getQuestions = async (url) => {
     const res = await axios.get(url);

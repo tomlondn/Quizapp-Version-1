@@ -1,9 +1,3 @@
-/* #root{
-   background-image: url("/src/quizapp.jpg");
-  background-repeat: repeat-x;
-  background-size: auto; 
-} */
-
 @keyframes blinkingBackground {
   0%		{ background-color: #10c018;}
   25%		{ background-color: #fff;}
@@ -50,7 +44,6 @@
 }
 
 .quizDifficulty .listItem.itemActive,
-
 .quizCategorie .listItem.itemActive,
 .quizDifficulty .listItem:hover,
 .categories .quizCategorie .listItem:hover {
@@ -135,7 +128,6 @@
   margin: 0 0 1em 0;
 }
 .quizList {
-  /* padding: 23em; */
   max-width:  887px;
   width: 100%;
   margin: 0 auto;
@@ -163,7 +155,3 @@
   animation: blinkingBackground 2s infinite;
   font-weight: bold;
 }
-
-
-
-

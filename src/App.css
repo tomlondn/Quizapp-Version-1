@@ -136,7 +136,8 @@
 }
 .quizList {
   /* padding: 23em; */
-  width:  887px;
+  max-width:  887px;
+  width: 100%;
   margin: 0 auto;
   color: #000;
   border: 1px solid #fff;

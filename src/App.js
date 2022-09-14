@@ -1,6 +1,6 @@
 import './App.css';
 import RandomQuizGenerator from './components/RandomQuizGenerator';
-import Questionairies from './components/Questionairies';
+import MillionärQuiz from './components/MillionärQuiz';
 
 function App() {
   const getToQuiz = element => {
@@ -35,8 +35,8 @@ function App() {
           <header><h2>Random-Quiz</h2></header>
         </section>
 
-        <section className='quizVariantButton' id="Questionairies" onClick={getToQuiz}>
-          <header><h2>Fragebögen</h2></header>
+        <section className='quizVariantButton' id="MillionärQuiz" onClick={getToQuiz}>
+          <header><h2>Quiz-Millionär Art</h2></header>
         </section>
       </section>
 
@@ -45,8 +45,8 @@ function App() {
           <RandomQuizGenerator />
         </section>
 
-        <section id="showQuestionairies" className="hide quizVariant">
-          <Questionairies />
+        <section id="showMillionärQuiz" className="hide quizVariant">
+          <MillionärQuiz/>
         </section>
       </section>
     </section>

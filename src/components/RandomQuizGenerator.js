@@ -5,6 +5,7 @@ import axios from "axios";
 import QuestionCount from "./QuestionCount";
 import RandomQuizList from "./RandomQuizList";
 import UserNameQuiz from "./UserNameQuiz";
+import QuizScore from "./QuizScore";
 
 
 const RandomQuizGenerator = () => {
@@ -25,8 +26,7 @@ const RandomQuizGenerator = () => {
   const [loading, setLoading] = useState(true);
   const [difficultys, setDifficulty] = useState(allDifficultys);
   const [quizConfig, setQuizConfig] = useState(baseQuizConfig);
-  const [quizState, setQuizState] = useState("name"); 
-  const [questionLoading, setQuestionLoading] = useState(false);
+  const [quizState, setQuizState] = useState("name");
   const [questions, setQuestions] = useState([]);
 
   const getCategorieArrayObjext = (cats) => {
@@ -38,14 +38,15 @@ const RandomQuizGenerator = () => {
     return newCatOby;
   }
   const formatCat = (cat) => {
-   cat = cat.replaceAll(" ", "_");
-   cat = cat.replace("&", "and");
-   console.log(cat);
-   
+    cat = cat.replaceAll(" ", "_");
+    cat = cat.replace("&", "and");
+    console.log(cat);
+
     return cat;
   }
   const getCategory = (index) => {
     let quizCategorys = [...categories];
+    console.log(quizCategorys);
     let newQuizConfig = { ...quizConfig };
 
     quizCategorys.forEach(item => {
@@ -56,7 +57,7 @@ const RandomQuizGenerator = () => {
     setCategories(quizCategorys);
 
     newQuizConfig.categorie = quizCategorys[index].categorie;
-    
+
     setQuizConfig(newQuizConfig);
 
   }
@@ -103,7 +104,7 @@ const RandomQuizGenerator = () => {
     if (quizConfig.categorie != null & !!quizConfig.count & quizConfig.difficulty != null) {
 
       var newApiUrl = "https://the-trivia-api.com/api/questions?categories=" +
-      formatCat(quizConfig.categorie).toLowerCase() + "&limit=" + quizConfig.count + "&difficulty=" + quizConfig.difficulty.toLowerCase();
+        formatCat(quizConfig.categorie).toLowerCase() + "&limit=" + quizConfig.count + "&difficulty=" + quizConfig.difficulty.toLowerCase();
 
       setQuizState("startet");
 
@@ -111,12 +112,23 @@ const RandomQuizGenerator = () => {
     }
   }
 
-  const setUserName = (event) => {
-    localStorage.setItem("Username" , event.currentTarget.value)
+  const checkeNameSetState = (event) => {
+    event.preventDefault();
+
+    if (sessionStorage.getItem("Username")) {
+      changeQuizState("config");
+
+    } else {
+      alert("Bitte einen Namen eingeben!");
+    }
   }
-  
+
+  const setUserName = (event) => {
+    sessionStorage.setItem("Username", event.currentTarget.value)
+  }
+
   const changeQuizScore = () => {
-      sessionStorage.setItem("Score", parseInt(sessionStorage.getItem("Score")) + 1);
+    sessionStorage.setItem("Score", parseInt(sessionStorage.getItem("Score")) + 1);
   }
 
   const changeQuizState = (state) => {
@@ -126,7 +138,6 @@ const RandomQuizGenerator = () => {
   const getQuestions = async (url) => {
     const res = await axios.get(url);
     setQuestions(res.data);
-    setQuestionLoading(false);
   };
 
   useEffect(() => {
@@ -143,7 +154,7 @@ const RandomQuizGenerator = () => {
     <section>
       {loading ? (
         <h4>Wait for Api...</h4>) :
-        quizState === "name" & !questionLoading ?
+        quizState === "name" ?
           (
             sessionStorage.clear(),
             <section className="takeName">
@@ -152,7 +163,7 @@ const RandomQuizGenerator = () => {
               </header>
               <UserNameQuiz
                 setName={setUserName}
-                setState= {changeQuizState}
+                setStateCheckName={checkeNameSetState}
               ></UserNameQuiz>
 
             </section>
@@ -183,7 +194,7 @@ const RandomQuizGenerator = () => {
           ) : quizState === "startet" ? (
 
             sessionStorage.setItem("Score", 0),
-            
+
             <section className="quizStartet">
               <header>
                 <h1>Quiz</h1>
@@ -193,21 +204,18 @@ const RandomQuizGenerator = () => {
 
               <RandomQuizList
                 allQuestions={questions}
-                setState = {changeQuizState}
-                changeScore = {changeQuizScore}
+                setState={changeQuizState}
+                changeScore={changeQuizScore}
               ></RandomQuizList>
 
               <p onClick={() => setQuizState("config")} className=' button'>Zurück zur Quiz-Konfig</p>
             </section>
 
           ) : (
-            <section className="quizScore">
-              <header>
-                <h1>Auswertung von {localStorage.getItem("Username")}</h1>
-                <h2>{sessionStorage.getItem("Score")} von {quizConfig.count} Fragen richtig</h2>
-              </header>
-
-            </section>
+            <QuizScore
+              quizConfig={quizConfig}
+              setQuizState={setQuizState}
+            ></QuizScore>
           )
       }
     </section>

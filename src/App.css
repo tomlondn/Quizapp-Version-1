@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 
-#showQuestionairies.hide {
+#showMillionärQuiz.hide {
   display: none;
 }
 
@@ -64,7 +64,7 @@
   box-shadow: 5px 5px 29px -5px black
 }
 #RandomQuiz:hover,
-#Questionairies:hover {
+#MillionärQuiz:hover {
   cursor: pointer;
   box-shadow: 5px 5px 29px -5px black
 }
@@ -154,4 +154,7 @@
   display: inline-block;
   animation: blinkingBackground 2s infinite;
   font-weight: bold;
+}
+.answerPossibilitie.disable{
+  color: transparent;
 }

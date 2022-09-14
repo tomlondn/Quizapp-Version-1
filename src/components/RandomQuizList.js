@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Question from './Question'
-import { useState } from 'react'
 
-const RandomQuizList = ({ allQuestions, setState, changeScore }) => {
-
+const RandomQuizList = ({ allQuestions, setState, changeScore, isMillionär }) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
-
 
     const checkAnswer = (event) => {
         var answerPossibilities = document.getElementsByClassName(event.currentTarget.className);
@@ -14,25 +11,28 @@ const RandomQuizList = ({ allQuestions, setState, changeScore }) => {
             if (answerPossibilitie.getAttribute("correct") === "yes") {
                 var correctAnswer = answerPossibilitie;
             }
+        }
+
+        if (event.currentTarget.getAttribute("correct") === "yes") {
+
+            event.currentTarget.style.backgroundColor = "green";
+            event.currentTarget.style.color = "white";
+
+            changeScore();
+
+        } else {
+            correctAnswer.className = correctAnswer.className + " blinking"
+
+            event.currentTarget.style.backgroundColor = "red";
+            event.currentTarget.style.color = "white";
+
+            if(isMillionär){
+                setState("score");
+            }
 
         }
 
-            if (event.currentTarget.getAttribute("correct") === "yes") {
-
-                event.currentTarget.style.backgroundColor = "green";
-                event.currentTarget.style.color = "white";
-
-                changeScore();
-              
-            } else {
-                correctAnswer.className = correctAnswer.className + " blinking"
-
-
-                event.currentTarget.style.backgroundColor = "red";
-                event.currentTarget.style.color = "white";
-            }
-
-            setTimeout(nextQuestion, 2000);
+        setTimeout(nextQuestion, 2000);
     }
 
     const nextQuestion = () => {
@@ -59,11 +59,11 @@ const RandomQuizList = ({ allQuestions, setState, changeScore }) => {
                             changeQuestion={nextQuestion}
                         ></Question>
                     )
-                }else {
+                } else {
                     return ('');
                 }
             })}
         </section>
     )
 }
-export default RandomQuizList
+export default RandomQuizList;

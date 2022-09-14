@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Question = React.memo(({ questionName, correctAnswer, incorrectAnswers, questionIndex, checkAnswer , changeQuestion, quizScore}) => {
+const Question = React.memo(({ questionName, correctAnswer, incorrectAnswers, questionIndex, checkAnswer }) => {
   let answerPossibilities = [];
 
   incorrectAnswers.forEach((item, index) => {
@@ -35,7 +35,6 @@ const Question = React.memo(({ questionName, correctAnswer, incorrectAnswers, qu
             )
           })}
         </div>
-        {/* <p onClick={changeQuestion} className='nextQuestion button'>Weiter</p> */}
       </article>
     </section>
   )

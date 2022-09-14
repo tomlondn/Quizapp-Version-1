@@ -71,7 +71,7 @@ const MillionärQuiz = () => {
       event.currentTarget.style.display = "none";
     } else if (version === "show Answer"){
 
-      for (var answerPossibilitie of answerPossibilities) {
+      for (answerPossibilitie of answerPossibilities) {
         if (answerPossibilitie.getAttribute("correct") === "no") {
           answerPossibilitie.className=answerPossibilitie.className + " disable";
         }

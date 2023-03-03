@@ -59,11 +59,15 @@
 #showRandomQuiz.hide {
   display: none;
 }
+#showCountryQuiz.hide {
+  display: none;
+}
 
 .chooseQuizVariants .quizVariantButton.active {
   box-shadow: 5px 5px 29px -5px black
 }
 #RandomQuiz:hover,
+#CountryQuiz:hover,
 #MillionärQuiz:hover {
   cursor: pointer;
   box-shadow: 5px 5px 29px -5px black

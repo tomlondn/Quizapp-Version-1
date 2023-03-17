@@ -15,7 +15,6 @@ const CountryQuiz = () => {
 
         try{
             const res = await axios.get(apiUrl);
-            console.log(res);
     
             if(res.status === 200) {
                 formatApiCountryData(res.data);
@@ -25,14 +24,12 @@ const CountryQuiz = () => {
                 setQuizState("apiError");
             }            
           } catch(err) {
-            console.log('Ohhhh nooo!');
+            setQuizState("apiError");
             console.log(err);
           }
 
      
     }
-
-    console.log(quizState);
 
     const formatApiCountryData = (apiData) => {
         let filteredData = [];
@@ -101,7 +98,6 @@ const CountryQuiz = () => {
     const startQuiz = (e) => {
         e.preventDefault();
         callApi();
-        console.log(quizState);
     }
 
     return (

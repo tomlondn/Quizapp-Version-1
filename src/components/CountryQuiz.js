@@ -24,6 +24,8 @@ const CountryQuiz = () => {
         }
     }
 
+    console.log(quizState);
+
     const formatApiCountryData = (apiData) => {
         let filteredData = [];
         apiData.forEach((item) => {

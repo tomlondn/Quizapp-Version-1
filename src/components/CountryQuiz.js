@@ -13,7 +13,12 @@ const CountryQuiz = () => {
 
     const callApi = async () => {
         const res = await axios.get(apiUrl);
-        formatApiCountryData(res.data);
+
+        if(res.status === 200) {
+            formatApiCountryData(res.data);
+        } else {
+            setQuizState("apiError");
+        }
     }
 
     const formatApiCountryData = (apiData) => {
@@ -99,7 +104,6 @@ const CountryQuiz = () => {
                         buttonLabel={"Generieren"}
                         button={true}
                         input={false}
-
                     ></InputField>
                 )
 
@@ -125,7 +129,13 @@ const CountryQuiz = () => {
                             countryToGuess = {countryToGuess}
                         ></GuessedCountrys>
                     </section>
-                ) : ""
+                ) : quizState === "apiError" (
+                    <section>
+                        <header>
+                            <h2> API aktuell nicht verfügbar</h2>
+                        </header>
+                    </section>
+                )
             }
 
         </section>

@@ -12,16 +12,24 @@ const CountryQuiz = () => {
     const [guesses, setGuesses] = useState(5);
 
     const callApi = async () => {
-        const res = await axios.get(apiUrl);
-        console.log(res);
 
-        if(res.status === 200) {
-            formatApiCountryData(res.data);
-            setQuizState("guess");
+        try{
+            const res = await axios.get(apiUrl);
+            console.log(res);
+    
+            if(res.status === 200) {
+                formatApiCountryData(res.data);
+                setQuizState("guess");
+    
+            } else {
+                setQuizState("apiError");
+            }            
+          } catch(err) {
+            console.log('Ohhhh nooo!');
+            console.log(err);
+          }
 
-        } else {
-            setQuizState("apiError");
-        }
+     
     }
 
     console.log(quizState);

@@ -41,7 +41,7 @@ function App() {
         </section>
 
         <section className='quizVariantButton' id="CountryQuiz" onClick={getToQuiz}>
-          <header><h2>Länder Raten</h2></header>
+          <header><h2>Land erraten</h2></header>
         </section>
       </section>
 

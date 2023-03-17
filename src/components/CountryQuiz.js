@@ -13,6 +13,7 @@ const CountryQuiz = () => {
 
     const callApi = async () => {
         const res = await axios.get(apiUrl);
+        console.log(res.status);
 
         if(res.status === 200) {
             formatApiCountryData(res.data);

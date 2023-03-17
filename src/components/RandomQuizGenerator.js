@@ -40,13 +40,11 @@ const RandomQuizGenerator = () => {
   const formatCat = (cat) => {
     cat = cat.replaceAll(" ", "_");
     cat = cat.replace("&", "and");
-    console.log(cat);
 
     return cat;
   }
   const getCategory = (index) => {
     let quizCategorys = [...categories];
-    console.log(quizCategorys);
     let newQuizConfig = { ...quizConfig };
 
     quizCategorys.forEach(item => {

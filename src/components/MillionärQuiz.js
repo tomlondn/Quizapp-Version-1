@@ -62,7 +62,6 @@ const MillionärQuiz = () => {
       var countToDisable = 2;
 
       for (var answerPossibilitie of answerPossibilities) {
-        console.log(countToDisable);
         if (answerPossibilitie.getAttribute("correct") === "no" && countToDisable > 0) {
           answerPossibilitie.className=answerPossibilitie.className + " disable";
           countToDisable--;

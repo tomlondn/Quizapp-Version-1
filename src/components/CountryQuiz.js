@@ -16,6 +16,8 @@ const CountryQuiz = () => {
 
         if(res.status === 200) {
             formatApiCountryData(res.data);
+            setQuizState("guess");
+
         } else {
             setQuizState("apiError");
         }
@@ -88,7 +90,6 @@ const CountryQuiz = () => {
     const startQuiz = (e) => {
         e.preventDefault();
         callApi();
-        setQuizState("guess");
     }
 
     return (

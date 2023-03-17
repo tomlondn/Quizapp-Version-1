@@ -162,3 +162,59 @@
 .answerPossibilitie.disable{
   color: transparent;
 }
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.arrow.hide, .arrow.hide {
+  display:  none;
+}
+
+.itemContintenTrue {
+  color: white;
+  background-color: green;
+}
+.itemContintenFalse {
+  color: white;
+  background-color: red;
+}
+.countryItem {
+  padding: .5em;
+   box-sizing: border-box;
+  border: 1px solid black;
+  display: inline-block;
+}
+.oneCountry::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+.oneCountry {
+  display: block;
+  width: 	100%;
+  margin: 0 0 1em 0;
+}
+.formWrapper   {
+  padding: .5em;
+}
+
+.countryHeaderProperties .countryProp {
+  padding: 1em 0;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.countryItem.itemName {
+  margin: 0 0 1em 0;
+}

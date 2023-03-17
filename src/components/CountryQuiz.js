@@ -15,6 +15,7 @@ const CountryQuiz = () => {
         const res = await axios.get(apiUrl);
         formatApiCountryData(res.data);
     }
+
     const formatApiCountryData = (apiData) => {
         let filteredData = [];
         apiData.forEach((item) => {
@@ -26,6 +27,7 @@ const CountryQuiz = () => {
                 "area": item.area
             })
         })
+
         setCountrys(filteredData);
 
         var keys = Object.keys(filteredData);
@@ -37,34 +39,43 @@ const CountryQuiz = () => {
     }
 
     const checkCountry = (e) => {
-        let searchedCountry = { ...countryToGuess }
-        let alreadyGuessed = [...guessedCountrys]
-        let countrys = [...allCountrys]
-        let remainingGuesses = guesses
-        let lastGuessed = window.sessionStorage.getItem("lastGuessed");
+        const searchedCountry = { ...countryToGuess }
+        const alreadyGuessed = [...guessedCountrys]
+        const countrys = [...allCountrys]
+        const remainingGuesses = guesses
+        const lastGuessed = window.sessionStorage.getItem("lastGuessed");
+        const allCountryNames = countrys.map(value => value.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+        const input = e.currentTarget.value.toLowerCase();
+        const countryError = document.getElementById("noValidInput");
 
-        console.log(guessedCountrys);
 
         if (e.key === "Enter") {
             e.preventDefault();
 
-            if (e.currentTarget.value === searchedCountry.name) {
-                //Win
+            if (allCountryNames.includes(input) === false)  {
+
+                countryError.innerHTML = "Bitte eingabe Überprüfen";
+                countryError.style.color = "red";
+
+            } else if  (input.value === searchedCountry.name) {
+
+                alert("Glückwunsch das gesuchte Land war "+searchedCountry.name)
+
             } else {
-                countrys.forEach((countryitem) => {
-                    if (e.currentTarget.value === countryitem.name) {
+                
+                countryError.innerHTML = "";
+                countryError.style.color = "black";
 
-                        generateSessionStorage(countryitem.name);
+                generateSessionStorage(input);
 
-                        if (countryitem.name !== lastGuessed) {
-                            alreadyGuessed.push(countryitem);
-                            setGuesses(remainingGuesses.remaining - 1);
-                        }
-                        setGuessedCountrys(alreadyGuessed);
-                        setGuesses(remainingGuesses - 1)
-                    }
-    
-                })
+
+                if (input !== lastGuessed) {
+
+                    alreadyGuessed.push(countrys.find(item => item.name.toLowerCase() === input));
+                    setGuessedCountrys(alreadyGuessed);
+                    setGuesses(remainingGuesses - 1)
+
+                }
 
             }
         }
@@ -99,6 +110,8 @@ const CountryQuiz = () => {
                             <h2>noch {guesses} versuche</h2>
                         </header>
 
+                        <p id='noValidInput'></p>
+
                         <InputField
                             action={checkCountry}
                             inputLabel={"Land eingeben:"}
@@ -109,6 +122,7 @@ const CountryQuiz = () => {
 
                         <GuessedCountrys
                             countrys={guessedCountrys}
+                            countryToGuess = {countryToGuess}
                         ></GuessedCountrys>
                     </section>
                 ) : ""

@@ -137,7 +137,7 @@ const CountryQuiz = () => {
                             <h2> API aktuell nicht verfügbar</h2>
                         </header>
                     </section>
-                )
+                ) : ""
             }
 
         </section>

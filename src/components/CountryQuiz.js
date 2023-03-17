@@ -93,6 +93,7 @@ const CountryQuiz = () => {
     const startQuiz = (e) => {
         e.preventDefault();
         callApi();
+        console.log(quizState);
     }
 
     return (

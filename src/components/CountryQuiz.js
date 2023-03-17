@@ -131,7 +131,7 @@ const CountryQuiz = () => {
                             countryToGuess = {countryToGuess}
                         ></GuessedCountrys>
                     </section>
-                ) : quizState === "apiError" (
+                ) : quizState === "apiError" ? (
                     <section>
                         <header>
                             <h2> API aktuell nicht verfügbar</h2>
